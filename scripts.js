@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < tablero.length; i++) {
       html += '<tr>';
       for (let j = 0; j < tablero[i].length; j++) {
-        html += `<td>${tablero[i][j]}</td>`;
+        html += `<td data-casilla='${AGUA}'></td>`;
       }
       html += '</tr>';
     }
@@ -154,6 +154,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // - Elección del Tamaño del Tablero -
   // - Inicio de la Partida -
   // - Elección de la Tirada -
+  document.getElementById('tablero-wrapper').addEventListener('click', (event) => {
+    const casilla_seleccionada = event.target;
+    console.log(casilla_seleccionada);
+
+    
+  })
   // - Reglas para Finalizar la Partida -
   // ============================
   // = INICIALIZACIÓN DE LA APP =
@@ -161,5 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
   inicializarTablero(filas, columnas);
   colocarBarcos(tablero, BARCOS)
   imprimirTablero(tablero);
+  console.log(tablero);
   // -Reseteo de la Partida -
 })
