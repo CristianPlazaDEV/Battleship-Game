@@ -7,26 +7,23 @@
     <script type="text/javascript" src="scripts.js"></script>
   </head>
   <body>
-    <header>
-      <div class="">
-        <div class=""></div>
-        <div class=""></div>
-      </div>
-    </header>
+    <div class="header-wrapper">
+      <h1>🚢💣 - BattleShip -</h1>
+    </div>
     <main>
-      <h2></h2>
-      <div class="">
-        <div class=""></div>
-        <div class=""></div>
-        <div class=""></div>
-        <div class=""></div>
+      <div class="user-name-wrapper">
+        <input id="user-name" type="text" name="user" placeholder="Introduce tu nombre de usuario...">
+        <button class="button" id="btn-confirm">Aceptar</button>
+      </div>
+      <div class="btn-wrapper">
+        <button class="button" id="btn-inicio">Iniciar Partida</button>
+        <button class="button" id="btn-reset">Resetear Partida</button>
       </div>
       <div id="tablero-wrapper"></div>
-      <div class="btn-wrapper">
-        <button class="button" id="btn-inicio"></button>
-        <button class="button" id="btn-reset"></button>
+      <div id="message">
+        <span id="message-content"></span>
       </div>
     </main>
-    <footer></footer>
+    <div class="footer"></div>
   </body>
 </html>
