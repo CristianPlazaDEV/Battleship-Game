@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const BTN_CONFIRM = document.getElementById('btn-confirm');
   const BTN_INICIAR = document.getElementById('btn-inicio');
   const BTN_RESETEAR = document.getElementById('btn-reset');
+  const USER = document.getElementById('user-name');
   // ============================
   // === FUNCIONES AUXILIARES ===
   // ============================
@@ -219,20 +220,35 @@ document.addEventListener('DOMContentLoaded', () => {
   function comprobarVictoria () {
     if (hundidos === BARCOS.length) {
       MESSAGE.style.display = 'block';
-      MESSAGE.textContent = `¡Victoria! Enhorabuena ${userName.value}, has ganado la partida.`
+      MESSAGE.textContent = `¡Victoria! Enhorabuena ${userName}, has ganado la partida.`;
+      CONTENEDOR_TABLERO.style.pointerEvents = 'none';
+      CONTENEDOR_TABLERO.style.opacity = '0.5';
     }
   }
   // Introducción de Nombre de usuario
-  BTN_CONFIRM.addEventListener('click', () => {
-    let user = document.getElementById('user-name');
-    if (user.value === '') {
+  function confirmarUsuario()  {
+    
+    let printUserName = document.getElementById('print-user-name');
+    if (USER.value === '') {
       alert('Debes de introducir un nombre de Usuario');
     } else {
-      userName = user.value;
-
+      userName = USER.value;
+      printUserName.textContent = `¡Buena Suerte, ${userName}!`;
+      USER.value = '';
       BTN_INICIAR.disabled = false;
       BTN_INICIAR.style.opacity = '1';
       BTN_INICIAR.style.pointerEvents = '';
+    }
+  };
+
+  BTN_CONFIRM.addEventListener('click', confirmarUsuario);
+
+  USER.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      confirmarUsuario();
+      USER.blur();
+    } else if (event.key === 'Escape') {
+      USER.value = '';
     }
   })
   // Iniciar Partida
@@ -256,6 +272,8 @@ document.addEventListener('DOMContentLoaded', () => {
     BTN_RESETEAR.style.opacity = '0.5';
     BTN_RESETEAR.style.pointerEvents = 'none';
     MESSAGE.style.display = 'none';
+    CONTENEDOR_TABLERO.style.pointerEvents = '';
+    CONTENEDOR_TABLERO.style.opacity = '1';
   })
 
   // ============================
