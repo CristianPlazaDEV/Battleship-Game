@@ -35,10 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const BTN_INICIAR = document.getElementById('btn-inicio');
   const BTN_RESETEAR = document.getElementById('btn-reset');
   const USER = document.getElementById('user-name');
+  const PRINT_USER = document.getElementById('print-user-name');
   // ============================
   // === FUNCIONES AUXILIARES ===
   // ============================
-
   // - Inicialización del Tablero -
   function inicializarTablero(filas, columnas) {
     for (let i = 0; i < filas; i++) {
@@ -165,6 +165,29 @@ document.addEventListener('DOMContentLoaded', () => {
       return 'tocado';
     }
   }
+// - Confirmar Usuario antes de empezar la partida
+  function confirmarUsuario()  {
+
+    if (USER.value === '') {
+      alert('Debes de introducir un nombre de Usuario');
+    } else {
+      userName = USER.value;
+      PRINT_USER.textContent = `¡Buena Suerte, ${userName}!`;
+      USER.value = '';
+      BTN_INICIAR.disabled = false;
+      BTN_INICIAR.style.opacity = '1';
+      BTN_INICIAR.style.pointerEvents = '';
+    }
+  };
+
+  // -Resetear los barcos -
+  function reiniciarBarcos(BARCOS) {
+  for (const barco of BARCOS) {
+    barco.posiciones = [];
+    barco.tocado = 0;
+    barco.hundido = false;
+  }
+};
   // ============================
   // ===== EVENT LISTENERS ======
   // ============================
@@ -191,7 +214,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 }
-
     switch (resultado) {
       case 'agua':
         td.style.backgroundColor = '#bed9ff';
@@ -225,22 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
       CONTENEDOR_TABLERO.style.opacity = '0.5';
     }
   }
-  // Introducción de Nombre de usuario
-  function confirmarUsuario()  {
-    
-    let printUserName = document.getElementById('print-user-name');
-    if (USER.value === '') {
-      alert('Debes de introducir un nombre de Usuario');
-    } else {
-      userName = USER.value;
-      printUserName.textContent = `¡Buena Suerte, ${userName}!`;
-      USER.value = '';
-      BTN_INICIAR.disabled = false;
-      BTN_INICIAR.style.opacity = '1';
-      BTN_INICIAR.style.pointerEvents = '';
-    }
-  };
-
+  // Confirmar Nombre de usuario
   BTN_CONFIRM.addEventListener('click', confirmarUsuario);
 
   USER.addEventListener('keydown', (event) => {
@@ -259,12 +266,21 @@ document.addEventListener('DOMContentLoaded', () => {
     BTN_RESETEAR.disabled = false;
     BTN_RESETEAR.style.opacity = '1';
     BTN_RESETEAR.style.pointerEvents = '';
+    BTN_INICIAR.style.display = 'none';
+    BTN_CONFIRM.disabled = true;
+    BTN_CONFIRM.style.opacity = '0.5';
+    BTN_CONFIRM.style.pointerEvents = 'none';
   })
   // Resetear procesarTirada
   BTN_RESETEAR.addEventListener('click', () => {
+    reiniciarBarcos(BARCOS);
     tablero = [];
     userName = '';
+    tocados = 0;
+    hundidos = 0;
+    movimientos = 0;
     CONTENEDOR_TABLERO.innerHTML = '';
+    BTN_INICIAR.style.display = 'block';
     BTN_INICIAR.disabled = true;
     BTN_INICIAR.style.opacity = '0.5';
     BTN_INICIAR.style.pointerEvents = 'none';
@@ -274,11 +290,17 @@ document.addEventListener('DOMContentLoaded', () => {
     MESSAGE.style.display = 'none';
     CONTENEDOR_TABLERO.style.pointerEvents = '';
     CONTENEDOR_TABLERO.style.opacity = '1';
+    BTN_CONFIRM.disabled = false;
+    BTN_CONFIRM.style.opacity = '1';
+    BTN_CONFIRM.style.pointerEvents = '';
+    PRINT_USER.textContent = '';
   })
 
   // ============================
   // = INICIALIZACIÓN DE LA APP =
   // ============================
+  reiniciarBarcos(BARCOS);
+  BTN_INICIAR.style.display = 'block';
   BTN_INICIAR.disabled = true;
   BTN_INICIAR.style.opacity = '0.5';
   BTN_INICIAR.style.pointerEvents = 'none';
@@ -286,4 +308,8 @@ document.addEventListener('DOMContentLoaded', () => {
   BTN_RESETEAR.style.opacity = '0.5';
   BTN_RESETEAR.style.pointerEvents = 'none';
   MESSAGE.style.display = 'none';
+  BTN_CONFIRM.disabled = false;
+  BTN_CONFIRM.style.opacity = '1';
+  BTN_CONFIRM.style.pointerEvents = '';
+  PRINT_USER.textContent = '';
 });

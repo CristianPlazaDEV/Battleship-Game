@@ -11,23 +11,29 @@
       <h1>🚢💣 - BattleShip -</h1>
     </div>
     <main>
-      <div class="user-name-wrapper">
-        <input
-          id="user-name"
-          type="text"
-          name="user"
-          placeholder="Introduce tu nombre de usuario..."
-        />
-        <button class="button" id="btn-confirm">Aceptar</button>
+      <div id="login-area">
+        <div class="user-name-wrapper">
+          <input
+            id="user-name"
+            type="text"
+            name="user"
+            placeholder="Introduce tu nombre de usuario..."
+            required
+          />
+          <button class="button" id="btn-confirm" type="submit">Aceptar</button>
+        </div>
       </div>
-      <div class="btn-wrapper">
-        <button class="button" id="btn-inicio">Iniciar Partida</button>
-        <button class="button" id="btn-reset">Resetear Partida</button>
-      </div>
-      <div id="print-user-name"></div>
-      <div id="tablero-wrapper"></div>
-      <div id="message">
-        <span id="message-content"></span>
+
+      <div id="game-area">
+        <div class="btn-wrapper">
+          <button class="button" id="btn-inicio">Iniciar Partida</button>
+          <button class="button" id="btn-reset">Resetear Partida</button>
+        </div>
+        <div id="print-user-name"></div>
+        <div id="tablero-wrapper"></div>
+        <div id="message">
+          <span id="message-content"></span>
+        </div>
       </div>
     </main>
     <div class="footer"></div>
